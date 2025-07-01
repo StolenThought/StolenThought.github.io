@@ -1,77 +1,143 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NZ National League Stats</title>
+  <title>National League Stats</title>
   <style>
-    * {
-      margin: 0;
-      box-sizing: border-box;
-    }
-
     body {
+      font-family: Arial, sans-serif;
       background: url('Background.jpg') no-repeat fixed;
       background-size: cover;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    nav.top-nav {
-      background-color: #000;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      overflow-x: auto;
-    }
-
-    .top-nav ul {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .top-nav li {
-      margin: 0;
-    }
-
-    .top-nav a {
-      display: block;
-      padding: 16px 20px;
       color: white;
-      text-decoration: none;
-      transition: background 0.3s, color 0.3s;
-      white-space: nowrap;
+      text-align: center;
+      margin: 0;
     }
 
-    .top-nav a:hover {
+    nav {
+      background-color: #0a0a0a;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    nav a, .dropdown .dropbtn {
+      color: white;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      margin: 0 6px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      background-color: transparent;
+    }
+
+    nav a:hover, .dropdown:hover .dropbtn {
+      background-color: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      background-color: white;
+      color: black;
+    }
+
+	.dropdown {
+      position: relative;
+	  top: 12px;
+    }
+
+    .dropdown-content, .dropdown-submenu-content {
+	  top: 35px;
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      border-radius: 6px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .dropdown-submenu:hover .dropdown-submenu-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 18px;
+      text-align: left;
+      display: block;
+      border-bottom: 1px solid #333;
+    }
+
+    .dropdown-content a:hover {
       background-color: #2a72b8;
     }
 
-    .top-nav a.active {
-      background-color: white;
-      color: black;
-      font-weight: bold;
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    .dropdown-submenu-content {
+      top: 0;
+      left: 100%;
+      margin-left: 1px;
+    }
+
+    .caret, .caret-active {
+      display: inline-block;
+      margin-left: 4px;
+      vertical-align: middle;
+      border-top: 5px solid #fff;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+    }
+
+    .caret-active {
+      border-top-color: #000;
     }
   </style>
 </head>
 <body>
-  <nav class="top-nav">
-    <ul>
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="NationalLeague.html">National League</a></li>
-      <li><a href="NoL.html">Northern League</a></li>
-      <li><a href="CL.html">Central League</a></li>
-      <li><a href="SL.html">Southern League</a></li><!--
-      <li><a href="NF.html">Northern Football</a></li>
-      <li><a href="WF.html">WaiBOP Football</a></li>
-      <li><a href="CeF.html">Central Football</a></li>
-      <li><a href="CaF.html">Capital Football</a></li>
-      <li><a href="MF.html">Mainland Football</a></li>
-      <li><a href="SF.html">Southern Football</a></li>-->
-    </ul>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+
+    <div class="dropdown">
+      <a href="NationalLeague.html" class="dropbtn">National League<span class="caret"></span></a>
+      <div class="dropdown-content">
+        <div class="dropdown-submenu">
+          <a href="#Current">Current Season &#9656;</a>
+          <div class="dropdown-submenu-content">
+            <a href="#SBS">Historical Seasons</a>
+          </div>
+        </div>
+        <div class="dropdown-submenu">
+          <a href="#Clubs">Clubs &#9656;</a>
+          <div class="dropdown-submenu-content">
+            <a href="#NLClubs">Northern League</a>
+            <a href="#CLClubs">Central League</a>
+            <a href="#SLClubs">Southern League</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="NorthernLeague.html">Northern League</a>
+    <a href="CentralLeague.html">Central League</a>
+    <a href="SouthernLeague.html">Southern League</a>
+
+    <div class="dropdown">
+      <a class="dropbtn">Federations<span class="caret"></span></a>
+      <div class="dropdown-content">
+        <a href="NorthernFootball.html">Northern Football</a>
+        <a href="WaiBOPFootball.html">WaiBOP Football</a>
+        <a href="CentralFootball.html">Central Football</a>
+        <a href="CapitalFootball.html">Capital Football</a>
+        <a href="MainlandFootball.html">Mainland Football</a>
+        <a href="SouthernFootball.html">Southern Football</a>
+      </div>
+    </div>
   </nav>
 
   <p>

@@ -13,28 +13,89 @@
     }
 
     nav {
-      background-color: #000;
+      background-color: #0a0a0a;
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      padding: 0;
+      flex-wrap: wrap;
+      padding: 10px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
-    nav a {
+    nav a, .dropdown .dropbtn {
       color: white;
-      padding: 16px 20px;
+      padding: 12px 18px;
       text-decoration: none;
-      display: block;
-      transition: background 0.3s, color 0.3s;
+      font-weight: bold;
+      border-radius: 8px;
+      margin: 0 6px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      background-color: transparent;
     }
 
-    nav a:hover {
-      background-color: #2a72b8;
+    nav a:hover, .dropdown:hover .dropbtn {
+      background-color: #1d4ed8;
+      transform: translateY(-2px);
     }
 
     nav a.active {
       background-color: white;
       color: black;
+    }
+
+	.dropdown {
+      position: relative;
+	  top: 12px;
+    }
+
+    .dropdown-content, .dropdown-submenu-content {
+	  top: 35px;
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      border-radius: 6px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .dropdown-submenu:hover .dropdown-submenu-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 18px;
+      text-align: left;
+      display: block;
+      border-bottom: 1px solid #333;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #2a72b8;
+    }
+
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    .dropdown-submenu-content {
+      top: 0;
+      left: 100%;
+      margin-left: 1px;
+    }
+
+    .caret, .caret-active {
+      display: inline-block;
+      margin-left: 4px;
+      vertical-align: middle;
+      border-top: 5px solid #fff;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+    }
+
+    .caret-active {
+      border-top-color: #000;
     }
 
     header {
@@ -65,13 +126,8 @@
       background-color: #2a72b8;
     }
 
-    .season-section {
-      display: none;
-    }
-
-    .season-section.active {
-      display: block;
-    }
+    .season-section { display: none; }
+    .season-section.active { display: block; }
 
     .scrollable {
       height: 586px;
@@ -88,22 +144,22 @@
       background: #111;
       display: flex;
       justify-content: center;
-      padding: 0;
+      padding: 10px;
     }
 
-    .season-nav a {
-      color: white;
-      padding: 14px 18px;
-      text-decoration: none;
-    }
-
-    .season-nav a:hover {
+    .season-nav select {
       background: #2a72b8;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
-    .season-nav a.nav-active {
-      background: white;
-      color: black;
+    .season-nav select option {
+      background: #111;
+      color: white;
     }
   </style>
   <script>
@@ -112,57 +168,89 @@
         section.classList.remove('active');
       });
       document.getElementById(seasonId).classList.add('active');
-
-      document.querySelectorAll('.season-nav a').forEach(link => link.classList.remove('nav-active'));
-      document.getElementById(seasonId + '-nav').classList.add('nav-active');
     }
-
-    window.onload = () => showSeason('2024-season');
+    window.onload = () => showSeason('2025-season');
   </script>
 </head>
 <body>
-
   <nav>
     <a href="index.html">Home</a>
-    <a href="NationalLeague.html" class="active">National League</a>
-    <a href="NoL.html">Northern League</a>
-    <a href="CL.html">Central League</a>
-    <a href="SL.html">Southern League</a><!--
-    <a href="NF.html">Northern Football</a>
-    <a href="WF.html">WaiBOP Football</a>
-    <a href="CeF.html">Central Football</a>
-    <a href="CaF.html">Capital Football</a>
-    <a href="MF.html">Mainland Football</a>
-    <a href="SF.html">Southern Football</a>-->
+
+    <div class="dropdown">
+      <a href="NationalLeague.html" class="active">National League<span class="caret-active"></span></a>
+      <div class="dropdown-content">
+        <div class="dropdown-submenu">
+          <a href="#Current">Current Season &#9656;</a>
+          <div class="dropdown-submenu-content">
+            <a href="#SBS">Historical Seasons</a>
+          </div>
+        </div>
+        <div class="dropdown-submenu">
+          <a href="#Clubs">Clubs &#9656;</a>
+          <div class="dropdown-submenu-content">
+            <a href="#NLClubs">Northern League</a>
+            <a href="#CLClubs">Central League</a>
+            <a href="#SLClubs">Southern League</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="NorthernLeague.html">Northern League</a>
+    <a href="CentralLeague.html">Central League</a>
+    <a href="SouthernLeague.html">Southern League</a>
+
+    <div class="dropdown">
+      <a class="dropbtn">Federations<span class="caret"></span></a>
+      <div class="dropdown-content">
+        <a href="NorthernFootball.html">Northern Football</a>
+        <a href="WaiBOPFootball.html">WaiBOP Football</a>
+        <a href="CentralFootball.html">Central Football</a>
+        <a href="CapitalFootball.html">Capital Football</a>
+        <a href="MainlandFootball.html">Mainland Football</a>
+        <a href="SouthernFootball.html">Southern Football</a>
+      </div>
+    </div>
   </nav>
 
-  <header><h1>National League Statistics</h1></header>
-
+  <header><h1>National League</h1></header>
   <div class="season-nav">
-    <a id="2025-season-nav" href="#" onclick="showSeason('2025-season')" class="nav-active">2025</a>
-    <a id="2024-season-nav" href="#" onclick="showSeason('2024-season')">2024</a>
-    <a id="2023-season-nav" href="#" onclick="showSeason('2023-season')">2023</a>
-    <a id="2022-season-nav" href="#" onclick="showSeason('2022-season')">2022</a>
-    <a id="2021-season-nav" href="#" onclick="showSeason('2021-season')">2021</a>
+    <select onchange="showSeason(this.value)">
+      <option value="2025-season" selected>2025</option>
+      <option value="2024-season">2024</option>
+      <option value="2023-season">2023</option>
+      <option value="2022-season">2022</option>
+      <option value="2021-season">2021</option>
+    </select>
   </div>
 
-  <!-- Repeat season sections -->
+
   <div id="2025-season" class="season-section active">
     <section>
       <h2>2025 Current Standings</h2>
       <table>
         <tr><th>Position</th><th>Team</th><th>Played</th><th>Won</th><th>Drawn</th><th>Lost</th><th>GF</th><th>GA</th><th>GD</th><th>Points</th></tr>
-        <tr><td>1</td><td>Team A</td><td>12</td><td>9</td><td>2</td><td>1</td><td>20</td><td>7</td><td>+13</td><td>29</td></tr>
+        <tr><td>1</td><td>Auckland FC Reserves</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>2</td><td>Wellington Phoenix Reserves</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>3</td><td>Northern League #1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>4</td><td>Northern League #2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>5</td><td>Northern League #3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>6</td><td>Northern League #4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>7</td><td>Central League #1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>8</td><td>Central League #2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>9</td><td>Central League #3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>10</td><td>Southern League #1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
+        <tr><td>11</td><td>Southern League #2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td>0</td></tr>
       </table>
     </section>
     <section>
       <h2>2025 Upcoming Fixtures</h2>
 	  <h3>Round 1</h3>
-      <p>Team A vs Team B – September 2025 – <a href="https://www.nzfootball.co.nz/matchcentre/2024/2712607141/2712624361">[Match Centre]</a></p>
-      <p>Team C vs Team D – September 2025</p>
-      <p>Team E vs Team F – September 2025</p>
-      <p>Team H vs Team I – September 2025</p>
-      <p>Team J vs Team K – September 2025</p>
+      <p>Team A vs Team B – September 2025 – <a class="matchcentre" href="https://www.nzfootball.co.nz/matchcentre/2024/2712607141/2712624361">[Match Centre]</a></p>
+      <p>Team C vs Team D – September 2025 – <a class="matchcentre" href="https://www.nzfootball.co.nz/matchcentre/2024/2712607141/2712624361">[Match Centre]</a></p>
+      <p>Team E vs Team F – September 2025 – <a class="matchcentre" href="https://www.nzfootball.co.nz/matchcentre/2024/2712607141/2712624361">[Match Centre]</a></p>
+      <p>Team H vs Team I – September 2025 – <a class="matchcentre" href="https://www.nzfootball.co.nz/matchcentre/2024/2712607141/2712624361">[Match Centre]</a></p>
+      <p>Team J vs Team K – September 2025 – <a class="matchcentre" href="https://www.nzfootball.co.nz/matchcentre/2024/2712607141/2712624361">[Match Centre]</a></p>
       <p>Team L vs Bye – September 2025</p>
     </section> <!--
     <section>
@@ -206,7 +294,7 @@
 				<tr><td rowspan='3'>1</td><td>Daniel Bunch</td><td>Birkenhead United</td><td rowspan='3'>8</td></tr>
 				<tr><td>Garbhan Coughlan</td><td>Cashmere Technical</td></tr>
 				<tr><td>Monty Patterson</td><td>Birkenhead United</td></tr>
-				<tr><td>4</td><td>Myer Bevan</td><td>Auckland City</td><td>7</td>
+				<tr><td>4</td><td>Myer Bevan</td><td>Auckland City</td><td>7</td></tr>
 				<tr><td rowspan='3'>5</td><td>Oscar Faulds</td><td>Napier City Rovers</td><td rowspan='3'>6</td></tr>
 				<tr><td>Alejandro Steinwascher</td><td>Coastal Spirit</td></tr>
 				<tr><td>David Yoo</td><td>Coastal Spirit</td></tr>
