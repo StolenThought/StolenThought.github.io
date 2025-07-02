@@ -48,7 +48,7 @@
     }
 
     .dropdown-content, .dropdown-submenu-content {
-	  top: 35px;
+	  top: 100%;
       display: none;
       position: absolute;
       background-color: #1a1a1a;
@@ -101,19 +101,20 @@
 </head>
 <body>
   <nav>
-    <a href="index.html" class="active">Home</a>
+    <a href="index.html">Home</a>
 
     <div class="dropdown">
-      <a href="NationalLeague.html" class="dropbtn">National League<span class="caret"></span></a>
+      <a class="active">National League<span class="caret-active"></span></a>
       <div class="dropdown-content">
+		<a href="NationalLeague.html">Home</a>
         <div class="dropdown-submenu">
-          <a href="#Current">Current Season &#9656;</a>
+          <a href="NationalLeagueCurrent.html">Current Season &#9656;</a>
           <div class="dropdown-submenu-content">
-            <a href="#SBS">Historical Seasons</a>
+            <a href="NationalLeagueSeasons.html">Historical Seasons</a>
           </div>
         </div>
         <div class="dropdown-submenu">
-          <a href="#Clubs">Clubs &#9656;</a>
+          <a href="NationalLeagueClubs.html">Clubs &#9656;</a>
           <div class="dropdown-submenu-content">
             <a href="#NLClubs">Northern League</a>
             <a href="#CLClubs">Central League</a>
@@ -138,7 +139,7 @@
         <a href="SouthernFootball.html">Southern Football</a>
       </div>
     </div>
-  </nav>
+	</nav>
 
   <p>
     Info about the New Zealand National League Statistics<br>

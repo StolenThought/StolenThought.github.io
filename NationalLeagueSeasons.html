@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>National League Stats</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('Background.jpg') no-repeat fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      margin: 0;
+    }
+
+    nav {
+      background-color: #0a0a0a;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    nav a, .dropdown .dropbtn {
+      color: white;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      margin: 0 6px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      background-color: transparent;
+    }
+
+    nav a:hover, .dropdown:hover .dropbtn {
+      background-color: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      background-color: white;
+      color: black;
+    }
+
+	.dropdown {
+      position: relative;
+	  top: 12px;
+    }
+
+    .dropdown-content, .dropdown-submenu-content {
+	  top: 100%;
+      display: none;
+      position: absolute;
+      background-color: #1a1a1a;
+      min-width: 200px;
+      border-radius: 6px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .dropdown-submenu:hover .dropdown-submenu-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 18px;
+      text-align: left;
+      display: block;
+      border-bottom: 1px solid #333;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #2a72b8;
+    }
+
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    .dropdown-submenu-content {
+      top: 0;
+      left: 100%;
+      margin-left: 1px;
+    }
+
+    .caret, .caret-active {
+      display: inline-block;
+      margin-left: 4px;
+      vertical-align: middle;
+      border-top: 5px solid #fff;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+    }
+
+    .caret-active {
+      border-top-color: #000;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+    }
+
+    section {
+      background-color: rgba(0, 0, 0, 0.7);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: white;
+    }
+
+    th, td {
+      border: 1px solid white;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #2a72b8;
+    }
+
+    .season-section { display: none; }
+    .season-section.active { display: block; }
+
+    .scrollable {
+      height: 586px;
+      overflow-y: scroll;
+    }
+
+    .sticky th {
+      position: sticky;
+      top: 0;
+      background-color: #2a72b8;
+    }
+
+    .season-nav {
+      background: #111;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .season-nav select {
+      background: #2a72b8;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .season-nav select option {
+      background: #111;
+      color: white;
+    }
+  </style>
+  <script>
+    function showSeason(seasonId) {
+      document.querySelectorAll('.season-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(seasonId).classList.add('active');
+    }
+    window.onload = () => showSeason('2024-season');
+  </script>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+
+    <div class="dropdown">
+      <a class="active">National League<span class="caret-active"></span></a>
+      <div class="dropdown-content">
+		<a href="NationalLeague.html">Home</a>
+        <div class="dropdown-submenu">
+          <a href="NationalLeagueCurrent.html">Current Season &#9656;</a>
+          <div class="dropdown-submenu-content">
+            <a href="NationalLeagueSeasons.html">Historical Seasons</a>
+          </div>
+        </div>
+        <div class="dropdown-submenu">
+          <a href="NationalLeagueClubs.html">Clubs &#9656;</a>
+          <div class="dropdown-submenu-content">
+            <a href="#NLClubs">Northern League</a>
+            <a href="#CLClubs">Central League</a>
+            <a href="#SLClubs">Southern League</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="NorthernLeague.html">Northern League</a>
+    <a href="CentralLeague.html">Central League</a>
+    <a href="SouthernLeague.html">Southern League</a>
+
+    <div class="dropdown">
+      <a class="dropbtn">Federations<span class="caret"></span></a>
+      <div class="dropdown-content">
+        <a href="NorthernFootball.html">Northern Football</a>
+        <a href="WaiBOPFootball.html">WaiBOP Football</a>
+        <a href="CentralFootball.html">Central Football</a>
+        <a href="CapitalFootball.html">Capital Football</a>
+        <a href="MainlandFootball.html">Mainland Football</a>
+        <a href="SouthernFootball.html">Southern Football</a>
+      </div>
+    </div>
+	</nav>
+
+  <header><h1>National League Historical Seasons</h1></header>
+  <div class="season-nav">
+    <select onchange="showSeason(this.value)">
+      <option value="2024-season" selected>2024</option>
+      <option value="2023-season">2023</option>
+      <option value="2022-season">2022</option>
+      <option value="2021-season">2021</option>
+    </select>
+  </div>
+
+  <div id="2024-season" class="season-section active">
+    <section> <!-- Standings -->
+		<h2>2024 Standings</h2>
+		<table>
+			<tr><th>Position</th><th>Team</th><th>Played</th><th>Won</th><th>Drawn</th><th>Lost</th><th>GF</th><th>GA</th><th>GD</th><th>Points</th></tr>
+			<tr><td>1</td><td>Birkenhead United</td><td>9</td><td>6</td><td>2</td><td>1</td><td>23</td><td>16</td><td>+7</td><td>20</td></tr>
+			<tr><td>2</td><td>Auckland City</td><td>9</td><td>6</td><td>1</td><td>2</td><td>20</td><td>10</td><td>+10</td><td>19</td></tr>
+			<tr><td>3</td><td>Western Springs</td><td>9</td><td>6</td><td>0</td><td>3</td><td>25</td><td>16</td><td>+9</td><td>18</td></tr>
+			<tr><td>4</td><td>Napier City Rovers</td><td>9</td><td>5</td><td>2</td><td>2</td><td>21</td><td>14</td><td>+7</td><td>17</td></tr>
+			<tr><td>5</td><td>Wellington Phoenix Reserves</td><td>9</td><td>4</td><td>1</td><td>4</td><td>16</td><td>19</td><td>-3</td><td>13</td></tr>
+			<tr><td>6</td><td>Wellington Olympic</td><td>9</td><td>3</td><td>2</td><td>4</td><td>17</td><td>15</td><td>+2</td><td>11</td></tr>
+			<tr><td>7</td><td>Coastal Spirit</td><td>9</td><td>3</td><td>2</td><td>4</td><td>18</td><td>20</td><td>-2</td><td>11</td></tr>
+			<tr><td>8</td><td>Cashmere Technical</td><td>9</td><td>2</td><td>3</td><td>4</td><td>16</td><td>18</td><td>-2</td><td>9</td></tr>
+			<tr><td>9</td><td>Eastern Suburbs</td><td>9</td><td>1</td><td>2</td><td>6</td><td>8</td><td>17</td><td>-9</td><td>5</td></tr>
+			<tr><td>10</td><td>Western Suburbs</td><td>9</td><td>1</td><td>1</td><td>7</td><td>9</td><td>28</td><td>-19</td><td>4</td></tr>
+		</table>
+    </section>
+	<section> <!-- Grand Final -->
+		<h2>2024 Grand Final</h2>
+		<p>Birkenhead United 1 – 2 Auckland City (aet)</p>
+	</section>
+	<section> <!-- Top Scorers -->
+		<h2>2024 Top Scorers</h2>
+		<div class="scrollable">
+			<table class="sticky">
+				<tr><th>Position</th><th>Player</th><th>Club</th><th>Goals</th></tr>
+				<tr><td rowspan='3'>1</td><td>Daniel Bunch</td><td>Birkenhead United</td><td rowspan='3'>8</td></tr>
+				<tr><td>Garbhan Coughlan</td><td>Cashmere Technical</td></tr>
+				<tr><td>Monty Patterson</td><td>Birkenhead United</td></tr>
+				<tr><td>4</td><td>Myer Bevan</td><td>Auckland City</td><td>7</td></tr>
+				<tr><td rowspan='3'>5</td><td>Oscar Faulds</td><td>Napier City Rovers</td><td rowspan='3'>6</td></tr>
+				<tr><td>Alejandro Steinwascher</td><td>Coastal Spirit</td></tr>
+				<tr><td>David Yoo</td><td>Coastal Spirit</td></tr>
+				<tr><td rowspan='2'>8</td><td>Matt Ellis</td><td>Western Springs</td><td rowspan='2'>5</td></tr>
+				<tr><td>Angus Kilkolly</td><td>Auckland City</td></tr>
+				<tr><td rowspan='3'>10</td><td>Adam Hewson</td><td>Napier City Rovers</td><td rowspan='3'>4</td></tr>
+				<tr><td>Jake Mechell</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Hamish Watson</td><td>Wellington Olympic</td></tr>
+				<tr><td rowspan='6'>13</td><td>Reid Drake</td><td>Western Springs</td><td rowspan='6'>3</td></tr>
+				<tr><td>Luke Flowerdew</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Ben Mata</td><td>Wellington Olympic</td></tr>
+				<tr><td>Patrick Tobin</td><td>Western Springs</td></tr>
+				<tr><td>Stipe Ukich</td><td>Auckland City</td></tr>
+				<tr><td>Ryan Watson</td><td>Wellington Phoenix</td></tr>
+				<tr><td rowspan='18'>19</td><td>Jordan Annear</td><td>Napier City Rovers</td><td rowspan='18'>2</td></tr>
+				<tr><td>Sebastian Barton-Ginger</td><td>Western Suburbs</td></tr>
+				<tr><td>Aidan Carey</td><td>Western Springs</td></tr>
+				<tr><td>Finn Caughey</td><td>Cashmere Technical</td></tr>
+				<tr><td>Joe Hoole</td><td>Coastal Spirit</td></tr>
+				<tr><td>Gavin Hoy</td><td>Wellington Olympic</td></tr>
+				<tr><td>Sam Lack</td><td>Napier City Rovers</td></tr>
+				<tr><td>Daniel MacLennan</td><td>Coastal Spirit</td></tr>
+				<tr><td>Jackson Manuel</td><td>Western Springs</td></tr>
+				<tr><td>Riley Manuel</td><td>Western Springs</td></tr>
+				<tr><td>Ardri McArthur</td><td>Birkenhead United</td></tr>
+				<tr><td>Isa Prins</td><td>Wellington Olympic</td></tr>
+				<tr><td>Oscar Ramsay</td><td>Western Springs</td></tr>
+				<tr><td>Kieran Richards</td><td>Napier City Rovers</td></tr>
+				<tr><td>Gabriel Sloane-Rodrigues</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Yuya Taguchi</td><td>Cashmere Technical</td></tr>
+				<tr><td>Eddie Wilkinson</td><td>Wellington Olympic</td></tr>
+				<tr><td>Malcolm Young</td><td>Western Suburbs</td></tr>
+				<tr><td rowspan='44'>37</td><td>David Ball</td><td>Wellington Phoenix</td><td rowspan='44'>1</td></tr>
+				<tr><td>Aidan Barbour-Ryan</td><td>Cashmere Technical</td></tr>
+				<tr><td>Dino Botica</td><td>Birkenhead United</td></tr>
+				<tr><td>Gianni Bouzoukis</td><td>Wellington Olympic</td></tr>
+				<tr><td>Luke Brooke-Smith</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Oscar Browne</td><td>Western Springs</td></tr>
+				<tr><td>Lachlan Candy</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Max Chretien</td><td>Napier City Rovers</td></tr>
+				<tr><td>Tor Davenport Petersen</td><td>Wellington Olympic</td></tr>
+				<tr><td>Ryan de Vries</td><td>Auckland City</td></tr>
+				<tr><td>Cameron Emerson</td><td>Napier City Rovers</td></tr>
+				<tr><td>Harry Fautley</td><td>Western Suburbs</td></tr>
+				<tr><td>Wan Gatkek</td><td>Western Springs</td></tr>
+				<tr><td>Thomas Golding</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Jack Hallahan</td><td>Cashmere Technical</td></tr>
+				<tr><td>Joseph Hopper</td><td>Wellington Olympic</td></tr>
+				<tr><td>Curtis Hughes</td><td>Birkenhead United</td></tr>
+				<tr><td>Mario Ilich</td><td>Auckland City</td></tr>
+				<tr><td>Luke Jorgensen</td><td>Birkenhead United</td></tr>
+				<tr><td>Dylan Laing-McConnell</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Nathan Lobo</td><td>Auckland City</td></tr>
+				<tr><td>Cameron Mackenzie</td><td>Western Suburbs</td></tr>
+				<tr><td>Dylan Manickum</td><td>Auckland City</td></tr>
+				<tr><td>Harry Mason</td><td>Napier City Rovers</td></tr>
+				<tr><td>Lyle Matthysen</td><td>Cashmere Technical</td></tr>
+				<tr><td>Lucas Meek</td><td>Western Suburbs</td></tr>
+				<tr><td>Jack Mitchell</td><td>Coastal Spirit</td></tr>
+				<tr><td>Kurtis Mogg</td><td>Western Springs</td></tr>
+				<tr><td>Dejan Naidoo</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Kaelin Nguyen</td><td>Wellington Olympic</td></tr>
+				<tr><td>Kentaro Ozaki</td><td>Auckland City</td></tr>
+				<tr><td>Miles Palmer</td><td>Birkenhead United</td></tr>
+				<tr><td>Lewis Partridge</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Aaryan Raj</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Jaylen Rodwell</td><td>Birkenhead United</td></tr>
+				<tr><td>Jayden Smith</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Ben Stanley</td><td>Napier City Rovers</td></tr>
+				<tr><td>Luke Supyk</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Emiliano Tade</td><td>Western Springs</td></tr>
+				<tr><td>Leon Van den Hoven</td><td>Birkenhead United</td></tr>
+				<tr><td>Oskar Van Hattum</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Nathan Walker</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Ben Wallace</td><td>Western Springs</td></tr>
+				<tr><td>Connor Wilson</td><td>Western Suburbs</td></tr>
+			</table>
+		</div>
+	</section>
+  </div>
+
+  <div id="2023-season" class="season-section">
+    <section> <!-- Standings -->
+		<h2>2023 Standings</h2>
+		<table>
+			<tr><th>Position</th><th>Team</th><th>Played</th><th>Won</th><th>Drawn</th><th>Lost</th><th>GF</th><th>GA</th><th>GD</th><th>Points</th></tr>
+			<tr><td>1</td><td>Wellington Olympic</td><td>9</td><td>7</td><td>2</td><td>0</td><td>34</td><td>15</td><td>+19</td><td>23</td></tr>
+			<tr><td>2</td><td>Auckland City</td><td>9</td><td>7</td><td>0</td><td>2</td><td>19</td><td>12</td><td>+7</td><td>21</td></tr>
+			<tr><td>3</td><td>Christchurch United</td><td>9</td><td>5</td><td>1</td><td>3</td><td>18</td><td>16</td><td>+2</td><td>16</td></tr>
+			<tr><td>4</td><td>Eastern Suburbs</td><td>9</td><td>4</td><td>3</td><td>2</td><td>23</td><td>11</td><td>+12</td><td>15</td></tr>
+			<tr><td>5</td><td>Cashmere Technical</td><td>9</td><td>4</td><td>1</td><td>4</td><td>24</td><td>24</td><td>0</td><td>13</td></tr>
+			<tr><td>6</td><td>Manurewa</td><td>9</td><td>4</td><td>1</td><td>4</td><td>16</td><td>20</td><td>-4</td><td>13</td></tr>
+			<tr><td>7</td><td>Auckland United</td><td>9</td><td>2</td><td>4</td><td>3</td><td>15</td><td>17</td><td>-2</td><td>10</td></tr>
+			<tr><td>8</td><td>Wellington Phoenix Reserves</td><td>9</td><td>3</td><td>0</td><td>6</td><td>19</td><td>24</td><td>-5</td><td>9</td></tr>
+			<tr><td>9</td><td>Napier City Rovers</td><td>9</td><td>2</td><td>1</td><td>6</td><td>13</td><td>26</td><td>-13</td><td>7</td></tr>
+			<tr><td>10</td><td>Petone</td><td>9</td><td>0</td><td>1</td><td>8</td><td>6</td><td>22</td><td>-16</td><td>1</td></tr>
+		</table>
+    </section>
+	<section> <!-- Grand Final -->
+		<h2>2023 Grand Final</h2>
+		<p>Wellington Olympic 2 – 0 Auckland City</p>
+	</section>
+	<section> <!-- Top Scorers --> 
+		<h2>2023 Top Scorers</h2>
+		<div class="scrollable">
+			<table class="sticky">
+				<tr><th>Position</th><th>Player</th><th>Club</th><th>Goals</th></tr>
+				<tr><td rowspan='2'>1</td><td>Gianni Bouzoukis</td><td>Wellington Olympic</td><td rowspan='2'>11</td></tr>
+				<tr><td>Garbhan Coughlan</td><td>Cashmere Technical</td></tr>
+				<tr><td>3</td><td>Angus Kilkolly</td><td>Auckland City</td><td>7</td></tr>
+				<tr><td rowspan='2'>4</td><td>Deri Corfe</td><td>Napier City Rovers</td><td rowspan='2'>6</td></tr>
+				<tr><td>Luis Toomey</td><td>Eastern Suburbs</td></tr>
+				<tr><td>6</td><td>Kingsley Sinclair</td><td>Eastern Suburbs</td><td>5</td></tr>
+				<tr><td rowspan='6'>7</td><td>Gavin Hoy</td><td>Wellington Olympic</td><td rowspan='6'>4</td></tr>
+				<tr><td>Dylan Manickum</td><td>Auckland City</td></tr>
+				<tr><td>Lyle Matthysen</td><td>Cashmere Technical</td></tr>
+				<tr><td>Jack-Henry Sinclair</td><td>Wellington Olympic</td></tr>
+				<tr><td>Josh Tollervey</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Hamish Watson</td><td>Wellington Olympic</td></tr>
+				<tr><td rowspan='10'>13</td><td>Ben Mata</td><td>Wellington Olympic</td><td rowspan='10'>3</td></tr>
+				<tr><td>Jonny McNamara</td><td>Napier City Rovers</td></tr>
+				<tr><td>Boon Ozawa</td><td>Manurewa</td></tr>
+				<tr><td>Monty Patterson</td><td>Manurewa</td></tr>
+				<tr><td>Sam Philip</td><td>Christchurch United</td></tr>
+				<tr><td>Josh Rudland</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Joel Stevens</td><td>Wellington Olympic</td></tr>
+				<tr><td>Eoghan Stokes</td><td>Christchurch United</td></tr>
+				<tr><td>Eddie Wilkinson</td><td>Christchurch United</td></tr>
+				<tr><td>Nik Zambrano</td><td>Auckland United</td></tr>
+				<tr><td rowspan='18'>23</td><td>Daniel Atkinson</td><td>Auckland United</td><td rowspan='18'>2</td></tr>
+				<tr><td>Nicolas Bobadilla</td><td>Manurewa</td></tr>
+				<tr><td>Matt Brazier</td><td>Petone</td></tr>
+				<tr><td>Francis de Vries</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Zander Edwards</td><td>Cashmere Technical</td></tr>
+				<tr><td>Kailan Gould</td><td>Wellington Olympic</td></tr>
+				<tr><td>Sean Headley</td><td>Manurewa</td></tr>
+				<tr><td>Daniel MacLennan</td><td>Christchurch United</td></tr>
+				<tr><td>Daniel Makowem</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Jake Mechell</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Mohamed Muzakkir-Nabeel</td><td>Manurewa</td></tr>
+				<tr><td>Kaelin Nguyen</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Tom Schwarz</td><td>Cashmere Technical</td></tr>
+				<tr><td>Luke Supyk</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Yuya Taguchi</td><td>Cashmere Technical</td></tr>
+				<tr><td>Matt Todd-Smith</td><td>Christchurch United</td></tr>
+				<tr><td>Oskar Van Hattum</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Ryan Verney</td><td>Eastern Suburbs</td></tr>
+				<tr><td rowspan='47'>41</td><td>Yousif Al-Kalisy</td><td>Auckland United</td><td rowspan='47'>1</td></tr>
+				<tr><td>Aidan Barbour-Ryan</td><td>Cashmere Technical</td></tr>
+				<tr><td>Charlie Beale</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Jonty Bidois</td><td>Christchurch United</td></tr>
+				<tr><td>Jack Cawley</td><td>Wellington Olympic</td></tr>
+				<tr><td>Zachary Chung</td><td>Auckland United</td></tr>
+				<tr><td>Ryan de Vries</td><td>Auckland City</td></tr>
+				<tr><td>Michael Den Heijer</td><td>Auckland City</td></tr>
+				<tr><td>Theo Ettema</td><td>Wellington Olympic</td></tr>
+				<tr><td>Liam Gillion</td><td>Auckland City</td></tr>
+				<tr><td>Jago Godden</td><td>Christchurch United</td></tr>
+				<tr><td>Xavier Green</td><td>Auckland United</td></tr>
+				<tr><td>Luke Grindlay</td><td>Petone</td></tr>
+				<tr><td>Joe Hopper</td><td>Wellington Olympic</td></tr>
+				<tr><td>Cameron Howieson</td><td>Auckland City</td></tr>
+				<tr><td>James Hoyle</td><td>Napier City Rovers</td></tr>
+				<tr><td>Stephen Hoyle</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Mario Ilich</td><td>Auckland City</td></tr>
+				<tr><td>Fumiya Ito</td><td>Auckland United</td></tr>
+				<tr><td>Shuaib Khan</td><td>Manurewa</td></tr>
+				<tr><td>Finn McKenlay</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Ry McLeod</td><td>Napier City Rovers</td></tr>
+				<tr><td>Oliver Middleton</td><td>Auckland United</td></tr>
+				<tr><td>Dylan Morris</td><td>Manurewa</td></tr>
+				<tr><td>Ronaldo Munoz</td><td>Manurewa</td></tr>
+				<tr><td>Regont Murati</td><td>Auckland City</td></tr>
+				<tr><td>Ashnarvy Mustapha</td><td>Petone</td></tr>
+				<tr><td>Jack O'Connor</td><td>Petone</td></tr>
+				<tr><td>Aaron O'Driscoll</td><td>Christchurch United</td></tr>
+				<tr><td>Lewis Partridge</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Joel Peterson</td><td>Christchurch United</td></tr>
+				<tr><td>Codey Phoenix</td><td>Auckland United</td></tr>
+				<tr><td>Oliver Pickering</td><td>Petone</td></tr>
+				<tr><td>Aaryan Raj</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Josh Redfearn</td><td>Auckland United</td></tr>
+				<tr><td>Jacob Richards</td><td>Cashmere Technical</td></tr>
+				<tr><td>Liam Schofield</td><td>Napier City Rovers</td></tr>
+				<tr><td>Tom Schwarz</td><td>Cashmere Technical</td></tr>
+				<tr><td>Matt Sheridan</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Campbell Strong</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Emiliano Tade</td><td>Auckland City</td></tr>
+				<tr><td>Hideto Takahashi</td><td>Auckland United</td></tr>
+				<tr><td>Hayat Ali Tobita</td><td>Manurewa</td></tr>
+				<tr><td>Dre Vollenhoven</td><td>Auckland United</td></tr>
+				<tr><td>Ryan Watson</td><td>Wellington Phoenix</td></tr>
+				<tr><td>Malcolm Young</td><td>Eastern Suburbs</td></tr>
+				<tr><td>Tong Zhou</td><td>Auckland City</td></tr>
+			</table>
+		</div>
+	</section>
+  </div>
+
+  <div id="2022-season" class="season-section">
+    <section> <!-- Standings -->
+		<h2>2022 Standings</h2>
+		<table>
+			<tr><th>Position</th><th>Team</th><th>Played</th><th>Won</th><th>Drawn</th><th>Lost</th><th>GF</th><th>GA</th><th>GD</th><th>Points</th></tr>
+			<tr><td>1</td><td>Auckland City</td><td>9</td><td>9</td><td>0</td><td>0</td><td>27</td><td>5</td><td>+22</td><td>27</td></tr>
+			<tr><td>2</td><td>Wellington Olympic</td><td>9</td><td>6</td><td>1</td><td>2</td><td>24</td><td>13</td><td>+11</td><td>19</td></tr>
+			<tr><td>3</td><td>Auckland United</td><td>9</td><td>6</td><td>0</td><td>3</td><td>21</td><td>15</td><td>+6</td><td>18</td></tr>
+			<tr><td>4</td><td>Christchurch United</td><td>9</td><td>5</td><td>1</td><td>3</td><td>17</td><td>11</td><td>+6</td><td>16</td></tr>
+			<tr><td>5</td><td>Melville United</td><td>9</td><td>3</td><td>2</td><td>4</td><td>18</td><td>20</td><td>-2</td><td>11</td></tr>
+			<tr><td>6</td><td>Napier City Rovers</td><td>9</td><td>3</td><td>2</td><td>4</td><td>16</td><td>21</td><td>-5</td><td>11</td></tr>
+			<tr><td>7</td><td>Cashmere Technical</td><td>9</td><td>3</td><td>1</td><td>5</td><td>20</td><td>23</td><td>-3</td><td>10</td></tr>
+			<tr><td>8</td><td>Birkenhead United</td><td>9</td><td>2</td><td>3</td><td>4</td><td>15</td><td>19</td><td>-4</td><td>9</td></tr>
+			<tr><td>9</td><td>Miramar Rangers</td><td>9</td><td>2</td><td>1</td><td>6</td><td>13</td><td>21</td><td>-8</td><td>7</td></tr>
+			<tr><td>10</td><td>Wellington Phoenix Reserves</td><td>9</td><td>1</td><td>1</td><td>7</td><td>10</td><td>28</td><td>-18</td><td>4</td></tr>
+		</table>
+    </section>
+	<section> <!-- Grand Final -->
+		<h2>2022 Grand Final</h2>
+		<p>Auckland City 3 – 2 Wellington Olympic</p>
+	</section>
+	<section> <!-- Top Scorers -->
+	    <h2>2022 Top Scorers</h2>
+	    <div class="scrollable">
+			<table class="sticky">
+			    <tr><th>Position</th><th>Player</th><th>Club</th><th>Goals</th></tr>
+			    <tr><td rowspan="2">1</td><td>Gianni Bouzoukis</td><td>Wellington Olympic</td><td rowspan="2">9</td></tr>
+			    <tr><td>Garbhan Coughlan</td><td>Cashmere Technical</td></tr>
+			    <tr><td>3</td><td>Jesse Randall</td><td>Wellington Olympic</td><td>7</td></tr>
+			    <tr><td>4</td><td>Oliver Colloty</td><td>Melville United</td><td>6</td></tr>
+			    <tr><td rowspan="4">5</td><td>Sam Mason-Smith</td><td>Miramar Rangers</td><td rowspan="4">5</td></tr>
+			    <tr><td>Dane Schnell</td><td>Birkenhead United</td></tr>
+			    <tr><td>Jack-Henry Sinclair</td><td>Wellington Olympic</td></tr>
+			    <tr><td>Emiliano Tade</td><td>Auckland City</td></tr>
+			    <tr><td rowspan="3">9</td><td>Luke Jorgensen</td><td>Birkenhead United</td><td rowspan="3">4</td></tr>
+			    <tr><td>Ryen Lawrence</td><td>Melville United</td></tr>
+			    <tr><td>Nic Zambrano</td><td>Auckland United</td></tr>
+			    <tr><td rowspan="9">12</td><td>Ryan de Vries</td><td>Auckland City</td><td rowspan="9">3</td></tr>
+			    <tr><td>Kian Donkers</td><td>Cashmere Technical</td></tr>
+			    <tr><td>Kailan Gould</td><td>Wellington Olympic</td></tr>
+			    <tr><td>Cameron Howieson</td><td>Auckland City</td></tr>
+			    <tr><td>Daniel MacLennan</td><td>Christchurch United</td></tr>
+			    <tr><td>Jonny McNamara</td><td>Napier City Rovers</td></tr>
+			    <tr><td>Jonty Roubos</td><td>Wellington Olympic</td></tr>
+			    <tr><td>Ben Wallace</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Eddie Wilkinson</td><td>Christchurch United</td></tr>
+			    <tr><td rowspan="14">21</td><td>Leaford Allen</td><td>Napier City Rovers</td><td rowspan="14">2</td></tr>
+			    <tr><td>Riley Bidois</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Dino Botica</td><td>Birkenhead United</td></tr>
+			    <tr><td>Alex Connor‑McClean</td><td>Birkenhead United</td></tr>
+			    <tr><td>Josh Galletly</td><td>Melville United</td></tr>
+			    <tr><td>Hiroyoshi Kamata</td><td>Auckland United</td></tr>
+			    <tr><td>Sam Lack</td><td>Napier City Rovers</td></tr>
+			    <tr><td>Joe Lee</td><td>Auckland City</td></tr>
+			    <tr><td>Christian Leopard</td><td>Napier City Rovers</td></tr>
+			    <tr><td>Lyle Matthysen</td><td>Cashmere Technical</td></tr>
+			    <tr><td>Fergus Neil</td><td>Napier City Rovers</td></tr>
+			    <tr><td>Mike Rabuka</td><td>Christchurch United</td></tr>
+			    <tr><td>Joshua Tollervey</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Oskar Van Hattum</td><td>Wellington Phoenix</td></tr>
+			    <tr><td rowspan="47">36</td><td>Jorge Akers</td><td>Miramar Rangers</td><td rowspan="47">1</td></tr>
+			    <tr><td>Sean Bright</td><td>Birkenhead United</td></tr>
+			    <tr><td>Conor Bullen</td><td>Napier City Rovers</td></tr>
+			    <tr><td>Michael Built</td><td>Cashmere Technical</td></tr>
+			    <tr><td>Sean Cooper</td><td>Birkenhead United</td></tr>
+			    <tr><td>Alex Greive</td><td>Birkenhead United</td></tr>
+			    <tr><td>Harrison Hinsley</td><td>Napier City Rovers</td></tr>
+			    <tr><td>Keegan Linderboom</td><td>Auckland United</td></tr>
+			    <tr><td>Finn McLennan-Elliott</td><td>Auckland United</td></tr>
+			    <tr><td>Andy McNeill</td><td>Miramar Rangers</td></tr>
+			    <tr><td>Harry Morton</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Liam Mulrooney</td><td>Christchurch United</td></tr>
+			    <tr><td>Rory Noonan</td><td>Christchurch United</td></tr>
+			    <tr><td>Michael O'Keeffe</td><td>Miramar Rangers</td></tr>
+			    <tr><td>Marcos Orellana</td><td>Wellington Olympic</td></tr>
+			    <tr><td>Gabriel Sloane-Rodrigues</td><td>Auckland United</td></tr>
+			    <tr><td>Martin Bueno</td><td>Auckland City</td></tr>
+			    <tr><td>Thomas Golding</td><td>Napier City Rovers</td></tr>
+			    <tr><td>Oscar Faulds</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Stephen Hoyle</td><td>Christchurch United</td></tr>
+			    <tr><td>Erik Panzer</td><td>Christchurch United</td></tr>
+			    <tr><td>Harlem Simiona</td><td>Napier City Rovers</td></tr>
+			    <tr><td>Joe Zupo</td><td>Christchurch United</td></tr>
+			    <tr><td>Kalib Lewis</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Campbell Strong</td><td>Cashmere Technical</td></tr>
+			    <tr><td>Nick Murphy</td><td>Miramar Rangers</td></tr>
+			    <tr><td>Peter-Daniel Osei</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Luke Tongue</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Harry Bark</td><td>Christchurch United</td></tr>
+			    <tr><td>Benjamin Mata</td><td>Auckland United</td></tr>
+			    <tr><td>Joe Bell</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Conor McDonald</td><td>Wellington Phoenix</td></tr>
+			    <tr><td>Oliver Fay</td><td>Cashmere Technical</td></tr>
+			    <tr><td>Callum McNeill</td><td>Wellington Olympic</td></tr>
+			    <tr><td>Matt Gould</td><td>Auckland City</td></tr>
+			    <tr><td>Jonty Roubos</td><td>Wellington Olympic</td></tr>
+			</table>
+	  </div>
+	</section>
+  </div>
+
+  <div id="2021-season" class="season-section">
+      <section> <!-- Standings -->
+		<h2>South-Central Series</h2>
+		<p>Unoffical season due to Northern League clubs unable to participate due to COVID-19.</p>
+    </section>
+    <section> <!-- Standings -->
+		<h2>2021 Standings</h2>
+		<table>
+			<tr><th>Position</th><th>Team</th><th>Played</th><th>Won</th><th>Drawn</th><th>Lost</th><th>GF</th><th>GA</th><th>GD</th><th>Points</th></tr>
+			<tr><td>1</td><td>Miramar Rangers</td><td>5</td><td>3</td><td>2</td><td>0</td><td>13</td><td>10</td><td>+3</td><td>11</td></tr>
+			<tr><td>2</td><td>Wellington Olympic</td><td>5</td><td>3</td><td>1</td><td>1</td><td>15</td><td>13</td><td>+2</td><td>10</td></tr>
+			<tr><td>3</td><td>Cashmere Technical</td><td>5</td><td>3</td><td>0</td><td>2</td><td>8</td><td>4</td><td>+4</td><td>9</td></tr>
+			<tr><td>4</td><td>Wellington Phoenix Reserves</td><td>5</td><td>2</td><td>0</td><td>3</td><td>15</td><td>8</td><td>+7</td><td>6</td></tr>
+			<tr><td>5</td><td>Western Suburbs</td><td>5</td><td>2</td><td>0</td><td>3</td><td>6</td><td>11</td><td>-5</td><td>6</td></tr>
+			<tr><td>6</td><td>Selwyn United</td><td>5</td><td>0</td><td>1</td><td>4</td><td>4</td><td>15</td><td>-11</td><td>1</td></tr>
+		</table>
+    </section>
+	<section> <!-- Grand Final -->
+		<h2>2021 Grand Final</h2>
+		<p>Miramar Rangers 7 – 2 Wellington Olympic</p>
+	</section>
+	<section> <!-- Top Scorers -->
+	    <h2>2021 Top Scorers</h2>
+	    <div class="scrollable">
+		<table class="sticky">
+			  <tr><th>Position</th><th>Player</th><th>Club</th><th>Goals</th></tr>
+			  <tr><td>1</td><td>Ollie Whyte</td><td>Miramar Rangers</td><td>7</td></tr>
+			  <tr><td rowspan="2">2</td><td>Kailan Gould</td><td>Wellington Olympic</td><td rowspan="2">5</td></tr>
+			  <tr><td>Luis Toomey</td><td>Wellington Phoenix Reserves</td></tr>
+			  <tr><td rowspan="5">4</td><td>Sam Mason-Smith</td><td>Miramar Rangers</td><td rowspan="5">4</td></tr>
+			  <tr><td>Benjamin Mata</td><td>Wellington Olympic</td></tr>
+			  <tr><td>João R.d.C. Moreira</td><td>Miramar Rangers</td></tr>
+			  <tr><td>Josh Rudland</td><td>Wellington Phoenix Reserves</td></tr>
+			  <tr><td>Oskar van Hattum</td><td>Wellington Phoenix Reserves</td></tr>
+			  <tr><td>9</td><td>Garbhan Coughlan</td><td>Cashmere Technical</td><td>3</td></tr>
+			  <tr><td rowspan="7">10</td><td>Gianni Bouzoukis</td><td>Wellington Olympic</td><td rowspan="7">2</td></tr>
+			  <tr><td>Harry Chote</td><td>Wellington Olympic</td></tr>
+			  <tr><td>Ihaia Delaney</td><td>Western Suburbs</td></tr>
+			  <tr><td>Hugo Delhommelle</td><td>Miramar Rangers</td></tr>
+			  <tr><td>Wan Gatkek</td><td>Western Suburbs</td></tr>
+			  <tr><td>Kaelin Nguyen</td><td>Wellington Phoenix Reserves</td></tr>
+			  <tr><td>Yuya Taguchi</td><td>Cashmere</td></tr>
+			  <tr><td rowspan="17">17</td><td>Jorge Akers</td><td>Miramar Rangers</td><td rowspan="17">1</td></tr>
+			  <tr><td>Jamie Carrodus</td><td>Selwyn United</td></tr>
+			  <tr><td>Alexander Clayton</td><td>Western Suburbs</td></tr>
+			  <tr><td>Nikolas Fairley</td><td>Selwyn United</td></tr>
+			  <tr><td>Samuel Field</td><td>Cashmere Technical</td></tr>
+			  <tr><td>Dorian Grault</td><td>Selwyn United</td></tr>
+			  <tr><td>Nathanael Hailemariam</td><td>Wellington Olympic</td></tr>
+			  <tr><td>Lyle Matthysen</td><td>Cashmere Technical</td></tr>
+			  <tr><td>Luke McKay</td><td>Selwyn United</td></tr>
+			  <tr><td>Rory McKeown</td><td>Wellington Olympic</td></tr>
+			  <tr><td>Scott Midgley</td><td>Miramar Rangers</td></tr>
+			  <tr><td>Alexander Palezevic</td><td>Wellington Olympic</td></tr>
+			  <tr><td>Tom Schwarz</td><td>Cashmere Technical</td></tr>
+			  <tr><td>Nathan Simes</td><td>Miramar Rangers</td></tr>
+			  <tr><td>Jack-Henry Sinclair</td><td>Wellington Olympic</td></tr>
+			  <tr><td>Oliver van Rijssel</td><td>Western Suburbs</td></tr>
+		</table>
+	  </div>
+	</section>
+  </div>
+</body>
+</html>
