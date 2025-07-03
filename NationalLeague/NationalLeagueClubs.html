@@ -177,6 +177,19 @@
     .season-section { display: none; }
     .season-section.active { display: block; }
   </style>
+  <script>
+    function showSeason(seasonId) {
+      document.querySelectorAll('.season-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(seasonId).classList.add('active');
+
+      document.querySelectorAll('#snav a').forEach(link => link.classList.remove('nav-active'));
+      document.getElementById(seasonId + '-nav').classList.add('nav-active');
+    }
+
+    window.onload = () => showSeason('northern');
+  </script>
 </head>
 <body>
   <nav>
