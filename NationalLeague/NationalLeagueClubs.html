@@ -42,13 +42,13 @@
       color: black;
     }
 
-	.dropdown {
+    .dropdown {
       position: relative;
-	  top: 12px;
+      top: 12px;
     }
 
     .dropdown-content, .dropdown-submenu-content {
-	  top: 100%;
+      top: 100%;
       display: none;
       position: absolute;
       background-color: #1a1a1a;
@@ -111,56 +111,71 @@
       border-radius: 10px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .club-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 12px 0;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .club-card img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: white;
+      padding: 4px;
+    }
+
+    .club-info {
+      flex: 1;
+    }
+
+    .club-info h3 {
+      margin: 0 0 4px 0;
+      font-size: 20px;
+    }
+
+    .club-info p {
+      margin: 2px 0;
+    }
+
+    ul#nav, ul#snav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+    }
+
+    #nav li, #snav li {
+      margin: 0;
+    }
+
+    #nav li a, #snav li a {
+      display: block;
       color: white;
+      padding: 16px;
+      text-decoration: none;
     }
 
-    th, td {
-      border: 1px solid white;
-      padding: 10px;
+    #nav li a:hover, #snav li a:hover {
+      background: #2a72b8;
     }
 
-    th {
-      background-color: #2a72b8;
+    #nav .active, #snav .nav-active {
+      background: white;
+      color: black;
     }
 
     .season-section { display: none; }
     .season-section.active { display: block; }
-
-    .scrollable {
-      height: 586px;
-      overflow-y: scroll;
-    }
-
-    .sticky th {
-      position: sticky;
-      top: 0;
-      background-color: #2a72b8;
-    }
-
-    .season-nav {
-      background: #111;
-      display: flex;
-      justify-content: center;
-      padding: 10px;
-    }
-
-    .season-nav select {
-      background: #2a72b8;
-      color: white;
-      padding: 10px 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .season-nav select option {
-      background: #111;
-      color: white;
-    }
   </style>
 </head>
 <body>
@@ -223,7 +238,7 @@
       </div>
     </div>
 	</nav>
-  
+
  <header><h1>National League 2024 Clubs</h1></header>
 
   <ul id="snav">
